@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body{
+            text-align: center;
+            font-size: 160%;
+            background-image: url('Cosmos.jpg') ;
+            background-size: cover;
+           
+            color: rgb(233, 58, 93);
+        }
+
+    </style>
+</head>
+
+    <body>
+      
+        <p id="dzis" style="font-size: small; text-align: left;"></p>
+        
+        <p><b>WIESIO HEUTE NACHRICHTEN</b></p>
+        <p id="chf" style="color: rgb(160, 160, 222);"></p>
+        <p id="eur" style="color: rgb(158, 158, 205);"></p>
+        <p id="usd" style="color: rgb(110, 110, 156);"></p>
+        <p id="gold" style="color: rgb(186, 186, 218); font-size: 200%;"></p>
+    <script>
+      
+      // Accept: application/json;
+        dd=new Date;
+        y=dd.getFullYear();
+        m=dd.getMonth()+1;
+        d=dd.getDate();
+
+        document.getElementById("dzis").innerHTML="Date  : "+d+"-"+m+"-"+y;
+
+// kod
+
+const apiUrl = 'http://api.nbp.pl/api/exchangerates/rates/a/chf/';
+const apiUrl1 = 'http://api.nbp.pl/api/exchangerates/rates/a/eur/';
+const apiUrl2 = 'http://api.nbp.pl/api/exchangerates/rates/a/usd/';
+const apiUrl3='https://api.nbp.pl/api/cenyzlota/last/1/?format=json'
+fetch(apiUrl)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+var zuzia = JSON.stringify(data);
+
+var ewa  = JSON.parse(zuzia);
+
+document.getElementById("chf").innerHTML = ewa.currency + " " +ewa.rates[0].mid;
+   
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+
+// ------------------
+
+fetch(apiUrl1)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+var zuzia1 = JSON.stringify(data);
+
+var ewa1 = JSON.parse(zuzia1);
+
+document.getElementById("eur").innerHTML = ewa1.currency + " " +ewa1.rates[0].mid;
+   
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+
+//-------------------------------
+fetch(apiUrl2)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+var zuzia2 = JSON.stringify(data);
+
+var ewa2 = JSON.parse(zuzia2);
+
+document.getElementById("usd").innerHTML = ewa2.currency + " " +ewa2.rates[0].mid;
+   
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+//-------------------- gold ----------------
+
+fetch(apiUrl3)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+var zuzia3 = JSON.stringify(data);
+
+var ewa3 = JSON.parse(zuzia3);
+
+document.getElementById("gold").innerHTML = "złoto : " + ewa3[0].cena + "  zł/gr";
+   
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+
+
+
+    </script>
+
+    </body>
+
+</html>
