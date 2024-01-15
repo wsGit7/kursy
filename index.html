@@ -38,95 +38,48 @@
         document.getElementById("dzis").innerHTML="Date  : "+d+"-"+m+"-"+y;
 
 // kod
+const array = [
+fetch('http://api.nbp.pl/api/exchangerates/rates/a/chf/'),
+fetch('http://api.nbp.pl/api/exchangerates/rates/a/eur/'),
+fetch('http://api.nbp.pl/api/exchangerates/rates/a/usd/'),
+fetch('https://api.nbp.pl/api/cenyzlota/last/1/?format=json')]
 
-const apiUrl = 'http://api.nbp.pl/api/exchangerates/rates/a/chf/';
-const apiUrl1 = 'http://api.nbp.pl/api/exchangerates/rates/a/eur/';
-const apiUrl2 = 'http://api.nbp.pl/api/exchangerates/rates/a/usd/';
-const apiUrl3='https://api.nbp.pl/api/cenyzlota/last/1/?format=json'
-fetch(apiUrl)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then(data => {
-var zuzia = JSON.stringify(data);
+async function main(){
 
+try{
+const res = await Promise.all(array);
+const data = await Promise.all(res.map((item)=>{
+  return item.json();
+}))
+  
+var zuzia = JSON.stringify(data[0]);
 var ewa  = JSON.parse(zuzia);
-
 document.getElementById("chf").innerHTML = ewa.currency + " " +ewa.rates[0].mid;
    
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
-
-// ------------------
-
-fetch(apiUrl1)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then(data => {
-var zuzia1 = JSON.stringify(data);
-
-var ewa1 = JSON.parse(zuzia1);
-
+var zuzia1 = JSON.stringify(data[1]);
+var ewa1  = JSON.parse(zuzia1);
 document.getElementById("eur").innerHTML = ewa1.currency + " " +ewa1.rates[0].mid;
-   
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
 
-//-------------------------------
-fetch(apiUrl2)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then(data => {
-var zuzia2 = JSON.stringify(data);
-
-var ewa2 = JSON.parse(zuzia2);
-
+var zuzia2 = JSON.stringify(data[2]);
+var ewa2  = JSON.parse(zuzia2);
 document.getElementById("usd").innerHTML = ewa2.currency + " " +ewa2.rates[0].mid;
-   
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
-//-------------------- gold ----------------
 
-fetch(apiUrl3)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then(data => {
-var zuzia3 = JSON.stringify(data);
-
-var ewa3 = JSON.parse(zuzia3);
-
+var zuzia3 = JSON.stringify(data[3]);
+var ewa3  = JSON.parse(zuzia3);
 document.getElementById("gold").innerHTML = "złoto : " + ewa3[0].cena + "  zł/gr";
-   
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
 
 
+  }
+
+  catch(error) {
+    // console.log("error");
+    document.getElementById("chf").innerHTML=" wystapil blad ";
+  }
+}
+main();
 
     </script>
 
     </body>
-
+  
 </html>
