@@ -42,7 +42,7 @@ const array = [
 fetch('http://api.nbp.pl/api/exchangerates/rates/a/chf/'),
 fetch('http://api.nbp.pl/api/exchangerates/rates/a/eur/'),
 fetch('http://api.nbp.pl/api/exchangerates/rates/a/usd/'),
-fetch('https://api.nbp.pl/api/cenyzlota/last/1/?format=json')]
+fetch('https://api.nbp.pl/api/cenyzlota/last/1/')]
 
 async function main(){
 
@@ -66,7 +66,7 @@ document.getElementById("usd").innerHTML = ewa2.currency + " " +ewa2.rates[0].mi
 
 var zuzia3 = JSON.stringify(data[3]);
 var ewa3  = JSON.parse(zuzia3);
-document.getElementById("gold").innerHTML = "złoto : " + ewa3[0].cena + "  zł/gr";
+document.getElementById("gold").innerHTML = "złoto : " + ewa3[0].cena + "  zł";
 
 
   }
