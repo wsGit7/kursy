@@ -73,7 +73,7 @@ document.getElementById("gold").innerHTML = "złoto : " + ewa3[0].cena + "  zł/
 
   catch(error) {
     // console.log("error");
-    document.getElementById("chf").innerHTML=" wystapil blad ";
+    document.getElementById("chf").innerHTML=error.name;
   }
 }
 main();
