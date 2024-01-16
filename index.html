@@ -55,7 +55,7 @@ const data = await Promise.all(res.map((item)=>{
 var zuzia = JSON.stringify(data[0]);
 var ewa  = JSON.parse(zuzia);
 document.getElementById("chf").innerHTML = ewa.currency + " " +ewa.rates[0].mid;
-   
+ /*  
 var zuzia1 = JSON.stringify(data[1]);
 var ewa1  = JSON.parse(zuzia1);
 document.getElementById("eur").innerHTML = ewa1.currency + " " +ewa1.rates[0].mid;
@@ -68,7 +68,7 @@ var zuzia3 = JSON.stringify(data[3]);
 var ewa3  = JSON.parse(zuzia3);
 document.getElementById("gold").innerHTML = "złoto : " + ewa3[0].cena + "  zł";
 
-
+*/
   }
 
   catch(error) {
