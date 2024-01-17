@@ -54,7 +54,8 @@ var data = await Promise.all(res.map((item)=>{
   
 var zuzia = JSON.stringify(data[0]);
 var ewa  = JSON.parse(zuzia);
-document.getElementById("chf").innerHTML = ewa.currency + " " +ewa.rates[0].mid;
+//document.getElementById("chf").innerHTML = ewa.currency + " " +ewa.rates[0].mid;
+document.getElementById("chf").innerHTML = " test ";
    
 var zuzia1 = JSON.stringify(data[1]);
 var ewa1  = JSON.parse(zuzia1);
